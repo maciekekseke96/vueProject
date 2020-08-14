@@ -1,22 +1,18 @@
 <template>
-  <div>
-    <printPlace></printPlace>
-    <chooseImage></chooseImage>
-    <userDataForm></userDataForm>
-    <orderSummary></orderSummary>
-    <thankyouPage></thankyouPage>
-  </div>
+  <div class="appMain"></div>
 </template>
 
 <script>
-import printPlace from "./components/printPlace.vue";
-import chooseImage from "./components/chooseImage.vue";
-import userDataForm from "./components/userDataForm.vue";
-import orderSummary from "./components/orderSummary.vue";
-import thankyouPage from "./components/thankyouPage.vue";
+import appHeader from "./components/Header/appHeader.vue";
+import printPlace from "./components/MainContent/printPlace.vue";
+import chooseImage from "./components/MainContent/chooseImage.vue";
+import userDataForm from "./components/MainContent/userDataForm.vue";
+import orderSummary from "./components/MainContent/orderSummary.vue";
+import thankyouPage from "./components/MainContent/thankyouPage.vue";
 
 export default {
   components: {
+    appHeader: appHeader,
     printPlace: printPlace,
     chooseImage: chooseImage,
     userDataForm: userDataForm,
@@ -33,7 +29,15 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: yellow;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.appMain {
+  height: 100vh;
+  width: 100vw;
+  border: 1px solid black;
+  background-color: #3aafa9;
 }
 </style>
