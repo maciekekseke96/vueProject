@@ -1,5 +1,7 @@
 <template>
-  <div class="appMain"></div>
+  <div class="appMain">
+    <appHeader></appHeader>
+  </div>
 </template>
 
 <script>
@@ -37,7 +39,7 @@ export default {
 .appMain {
   height: 100vh;
   width: 100vw;
-  border: 1px solid black;
   background-color: #3aafa9;
+  padding-top: 15px;
 }
 </style>
