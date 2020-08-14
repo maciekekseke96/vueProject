@@ -1,6 +1,9 @@
 <template>
   <div class="appMain">
     <appHeader></appHeader>
+    <div class="mainContent">
+      <startingPage></startingPage>
+    </div>
   </div>
 </template>
 
@@ -11,10 +14,12 @@ import chooseImage from "./components/MainContent/chooseImage.vue";
 import userDataForm from "./components/MainContent/userDataForm.vue";
 import orderSummary from "./components/MainContent/orderSummary.vue";
 import thankyouPage from "./components/MainContent/thankyouPage.vue";
+import startingPage from "./components/MainContent/startingPage.vue";
 
 export default {
   components: {
     appHeader: appHeader,
+    startingPage: startingPage,
     printPlace: printPlace,
     chooseImage: chooseImage,
     userDataForm: userDataForm,
@@ -41,5 +46,12 @@ export default {
   width: 100vw;
   background-color: #3aafa9;
   padding-top: 15px;
+}
+
+.mainContent {
+  width: 80vw;
+  height: 70vh;
+  border: 4px solid black;
+  margin: 40px auto;
 }
 </style>
