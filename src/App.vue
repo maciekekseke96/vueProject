@@ -2,7 +2,10 @@
   <div class="appMain">
     <appHeader></appHeader>
     <div class="mainContent">
-      <startingPage></startingPage>
+      <component
+        v-bind:is="appSectionList[appSectionController]"
+        v-on:changeAppControler="updateSectionController($event)"
+      ></component>
     </div>
   </div>
 </template>
@@ -29,8 +32,21 @@ export default {
   name: "app",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      appSectionList: [
+        "startingPage",
+        "printPlace",
+        "chooseImage",
+        "userDataForm",
+        "orderSummary",
+        "thankyouPage",
+      ],
+      appSectionController: 0,
     };
+  },
+  methods: {
+    updateSectionController: function (controler) {
+      this.appSectionController = controler;
+    },
   },
 };
 </script>

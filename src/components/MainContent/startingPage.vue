@@ -1,6 +1,6 @@
 <template>
   <div class="startingPage">
-    <div class="startBtn">Zacznijmy !</div>
+    <div class="startBtn" v-on:click = "changeAppControler">Zacznijmy !</div>
   </div>
 </template>
 
@@ -9,6 +9,11 @@ export default {
   name: "startingPage",
   data() {
     return {};
+  },
+  methods: {
+    changeAppControler: function () {
+      this.$emit(`changeAppControler`, 1);
+    },
   },
 };
 </script>
