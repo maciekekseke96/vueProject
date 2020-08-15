@@ -41,6 +41,7 @@ export default {
         "thankyouPage",
       ],
       appSectionController: 0,
+      printPlaces: [],
     };
   },
   methods: {
