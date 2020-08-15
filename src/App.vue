@@ -1,12 +1,12 @@
 <template>
   <div class="appMain">
     <appHeader></appHeader>
-    <div class="mainContent">
+    <transition name="fade" mode="out-in">
       <component
         v-bind:is="appSectionList[appSectionController]"
         v-on:changeAppControler="updateSectionController($event)"
       ></component>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -63,11 +63,16 @@ export default {
   background-color: #3aafa9;
   padding-top: 15px;
 }
+.fade-enter-active {
+  transition: opacity 1s ease-out;
+}
+.fade-leave-active {
+  transition: opacity 1s ease-out;
+}
 
-.mainContent {
-  width: 80vw;
-  height: 70vh;
-  border: 4px solid black;
-  margin: 40px auto;
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  display: none;
 }
 </style>

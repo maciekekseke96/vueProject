@@ -20,8 +20,10 @@ export default {
 
 <style scoped>
 .startingPage {
-  width: 100%;
-  height: 100%;
+  width: 80vw;
+  height: 70vh;
+  border: 4px solid black;
+  margin: 40px auto;
   display: flex;
   justify-content: center;
   align-items: center;
