@@ -6,32 +6,35 @@
         <div class="option front">
           <h2>Przód</h2>
           <div class="img front"></div>
-          <input
-            v-on:change="handleCheckboxChange"
-            type="checkbox"
-            value="front"
-            v-model="printPlaces"
-          />
+          <input type="checkbox" value="front" v-model="printPlaces" />
         </div>
         <div class="option back">
           <h2>Tył</h2>
           <div class="img back"></div>
-          <input
-            v-on:change="handleCheckboxChange"
-            type="checkbox"
-            value="back"
-            v-model="printPlaces"
-          />
+          <input type="checkbox" value="back" v-model="printPlaces" />
         </div>
       </div>
     </div>
-    <div class="overviewSection"></div>
+    <overview
+      v-bind:imageID="imageID"
+      v-bind:printPlaces="printPlaces"
+    ></overview>
   </div>
 </template>
 
 <script>
+import overview from "../Overview/overview.vue";
+
 export default {
+  props: {
+    imageID: {
+      type: "number",
+    },
+  },
   name: "printPlace",
+  components: {
+    overview: overview,
+  },
   data() {
     return {
       printPlaces: [],
@@ -40,9 +43,6 @@ export default {
   methods: {
     changeAppControler: function () {
       this.$emit(`changeAppControler`, 0);
-    },
-    handleCheckboxChange: function () {
-      console.log(this.printPlaces);
     },
   },
 };

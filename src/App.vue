@@ -4,6 +4,7 @@
     <transition name="fade" mode="out-in">
       <component
         v-bind:is="appSectionList[appSectionController]"
+        v-bind:imageId="imgID"
         v-on:changeAppControler="updateSectionController($event)"
       ></component>
     </transition>
@@ -42,12 +43,16 @@ export default {
       ],
       appSectionController: 0,
       printPlaces: [],
+      imgID: 0,
     };
   },
   methods: {
     updateSectionController: function (controler) {
       this.appSectionController = controler;
     },
+  },
+  created() {
+    this.imgID = Math.floor(Math.random() * 1000);
   },
 };
 </script>
