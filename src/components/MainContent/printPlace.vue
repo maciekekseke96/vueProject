@@ -28,7 +28,7 @@ import overview from "../Overview/overview.vue";
 export default {
   props: {
     imageID: {
-      type: "number",
+      type: Number,
     },
   },
   name: "printPlace",

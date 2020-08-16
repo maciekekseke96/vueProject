@@ -4,7 +4,7 @@
     <transition name="fade" mode="out-in">
       <component
         v-bind:is="appSectionList[appSectionController]"
-        v-bind:imageId="imgID"
+        v-bind:imageID="imgID"
         v-on:changeAppControler="updateSectionController($event)"
       ></component>
     </transition>

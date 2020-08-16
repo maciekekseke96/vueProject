@@ -2,10 +2,18 @@
   <div class="overviewSection">
     <h1>Podgląd zamówienia</h1>
     <div class="overview tshirtStateFront">
-      <div v-if="printPlaces.includes('front')" class="choosenImgFront"></div>
+      <div
+        v-if="printPlaces.includes('front')"
+        class="choosenImgFront"
+        v-bind:style="[this.choosenImgFrontStyle]"
+      ></div>
     </div>
     <div class="overview tshirtStateBack">
-      <div v-if="printPlaces.includes('back')" class="choosenImgBack"></div>
+      <div
+        v-if="printPlaces.includes('back')"
+        class="choosenImgBack"
+        v-bind:style="[this.choosenImgBackStyle]"
+      ></div>
     </div>
     <div class="overview currentPrice">
       <p>Cena: {{ this.currentPrice }} zł</p>
@@ -27,7 +35,28 @@ export default {
   data() {
     return {
       currentPrice: 20,
+      choosenImgFrontStyle: {
+        position: "absolute",
+        width: "100px",
+        height: "100px",
+        border: "1px solid black",
+        left: "61px",
+        top: "60px",
+        backgroundImage: `url("https://picsum.photos/id/${this.imageID}/100/")`,
+      },
+      choosenImgBackStyle: {
+        position: "absolute",
+        width: "100px",
+        height: "100px",
+        border: "1px solid black",
+        left: "67px",
+        top: "60px",
+        backgroundImage: `url("https://picsum.photos/id/${this.imageID}/100/")`,
+      },
     };
+  },
+  created() {
+    console.log(this.imageID);
   },
 };
 </script>
@@ -78,24 +107,5 @@ export default {
   background-repeat: no-repeat;
   background-position: cover;
   position: relative;
-}
-
-.choosenImgFront {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-  left: 61px;
-  top: 60px;
-  background-image: url("https://picsum.photos/id/2/100/");
-}
-.choosenImgBack {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-  left: 67px;
-  top: 60px;
-  background-image: url("https://picsum.photos/id/2/100/");
 }
 </style>
