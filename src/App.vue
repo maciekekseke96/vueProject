@@ -51,6 +51,7 @@ export default {
       printPlaces: [],
       imgID: 0,
       currentPrice: 0,
+      userData: {},
     };
   },
   methods: {
