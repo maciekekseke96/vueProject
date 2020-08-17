@@ -9,7 +9,8 @@
           v-bind:currentPrice="currentPrice"
           v-bind:printPlaces="printPlaces"
           v-on:changeAppControler="updateSectionController($event)"
-          v-on:dataSent="updateData($event)"
+          v-on:dataSent="updateDataPrintPlace($event)"
+          v-on:dataSentfromChooseImage="updateDataChooseImage($event)"
         ></component>
       </keep-alive>
     </transition>
@@ -56,9 +57,12 @@ export default {
     updateSectionController: function (controler) {
       this.appSectionController = controler;
     },
-    updateData: function (data) {
+    updateDataPrintPlace: function (data) {
       this.printPlaces = data.printPlaces;
       this.currentPrice = data.updatedPrice;
+    },
+    updateDataChooseImage: function (data) {
+      this.imgID = data.updatedImgID;
     },
   },
   created() {

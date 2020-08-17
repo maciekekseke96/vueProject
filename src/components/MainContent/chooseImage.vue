@@ -82,9 +82,8 @@ export default {
       }
     },
     sendDataToApp: function (controler) {
-      this.$emit(`dataSent`, {
-        printPlaces: this.printPlaces,
-        updatedPrice: this.updatedPrice,
+      this.$emit(`dataSentfromChooseImage`, {
+        updatedImgID: this.currentImgID,
       });
       this.changeAppControler(controler);
     },
@@ -179,6 +178,11 @@ export default {
   text-align: center;
   position: absolute;
   top: 40%;
+}
+
+.imgBtn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .imgBtn.previous {

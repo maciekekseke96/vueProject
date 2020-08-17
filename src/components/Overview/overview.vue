@@ -58,6 +58,28 @@ export default {
       },
     };
   },
+  watch: {
+    imageID: function () {
+      this.choosenImgFrontStyle = {
+        position: "absolute",
+        width: "100px",
+        height: "100px",
+        border: "1px solid black",
+        left: "61px",
+        top: "60px",
+        backgroundImage: `url("https://picsum.photos/id/${this.imageID}/100/")`,
+      };
+      this.choosenImgBackStyle = {
+        position: "absolute",
+        width: "100px",
+        height: "100px",
+        border: "1px solid black",
+        left: "67px",
+        top: "60px",
+        backgroundImage: `url("https://picsum.photos/id/${this.imageID}/100/")`,
+      };
+    },
+  },
   created() {
     console.log(this.imageID);
   },
