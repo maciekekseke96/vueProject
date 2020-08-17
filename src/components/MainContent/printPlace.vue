@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="controlButtons">
-        <div class="btn">
+        <div class="btn" v-on:click="sendDataToApp(0)">
           Wstecz
         </div>
         <div class="btn" v-on:click="sendDataToApp(2)">

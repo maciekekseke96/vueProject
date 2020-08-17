@@ -2,13 +2,16 @@
   <div class="appMain">
     <appHeader></appHeader>
     <transition name="fade" mode="out-in">
-      <component
-        v-bind:is="appSectionList[appSectionController]"
-        v-bind:imageID="imgID"
-        v-bind:currentPrice="currentPrice"
-        v-on:changeAppControler="updateSectionController($event)"
-        v-on:dataSent="updateData($event)"
-      ></component>
+      <keep-alive>
+        <component
+          v-bind:is="appSectionList[appSectionController]"
+          v-bind:imageID="imgID"
+          v-bind:currentPrice="currentPrice"
+          v-bind:printPlaces="printPlaces"
+          v-on:changeAppControler="updateSectionController($event)"
+          v-on:dataSent="updateData($event)"
+        ></component>
+      </keep-alive>
     </transition>
   </div>
 </template>
