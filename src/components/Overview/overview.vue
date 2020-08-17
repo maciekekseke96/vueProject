@@ -16,7 +16,7 @@
       ></div>
     </div>
     <div class="overview currentPrice">
-      <p>Cena: {{ this.currentPrice }} zł</p>
+      <p>Cena: {{ this.printPlaces.length * 10 }} zł</p>
     </div>
   </div>
 </template>
@@ -30,11 +30,14 @@ export default {
     printPlaces: {
       type: Array,
     },
+    currentPrice: {
+      type: Number,
+    },
   },
   name: "overview",
   data() {
     return {
-      currentPrice: 20,
+      updatedPrice: 0,
       choosenImgFrontStyle: {
         position: "absolute",
         width: "100px",
@@ -57,6 +60,10 @@ export default {
   },
   created() {
     console.log(this.imageID);
+  },
+  updated() {
+    this.updatedPrice = this.printPlaces * 10;
+    this.$emit(`changePrice`, this.updatedPrice);
   },
 };
 </script>

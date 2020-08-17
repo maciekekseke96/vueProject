@@ -14,10 +14,20 @@
           <input type="checkbox" value="back" v-model="printPlaces" />
         </div>
       </div>
+      <div class="controlButtons">
+        <div class="btn">
+          Wstecz
+        </div>
+        <div class="btn" v-on:click="sendDataToApp(2)">
+          Dalej
+        </div>
+      </div>
     </div>
     <overview
       v-bind:imageID="imageID"
       v-bind:printPlaces="printPlaces"
+      v-bind:currentPrice="currentPrice"
+      v-on:changePrice="changePrice($event)"
     ></overview>
   </div>
 </template>
@@ -30,6 +40,9 @@ export default {
     imageID: {
       type: Number,
     },
+    currentPrice: {
+      type: Number,
+    },
   },
   name: "printPlace",
   components: {
@@ -38,11 +51,22 @@ export default {
   data() {
     return {
       printPlaces: [],
+      updatedPrice: 0,
     };
   },
   methods: {
-    changeAppControler: function () {
-      this.$emit(`changeAppControler`, 0);
+    changeAppControler: function (controler) {
+      this.$emit(`changeAppControler`, controler);
+    },
+    changePrice: function (price) {
+      this.updatedPrice = price;
+    },
+    sendDataToApp: function (controler) {
+      this.$emit(`dataSent`, {
+        printPlaces: this.printPlaces,
+        updatedPrice: this.updatedPrice,
+      });
+      this.changeAppControler(controler);
     },
   },
 };
@@ -130,5 +154,33 @@ export default {
   height: 100%;
   width: 30%;
   border-left: 2px solid black;
+}
+
+.controlButtons {
+  width: 70%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.btn {
+  height: 100%;
+  width: 25%;
+  border: 1px solid black;
+  font-family: "Russo One", sans-serif;
+  font-size: 20px;
+  color: #def2f1;
+  background-color: #17252a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.08);
 }
 </style>

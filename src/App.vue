@@ -5,7 +5,9 @@
       <component
         v-bind:is="appSectionList[appSectionController]"
         v-bind:imageID="imgID"
+        v-bind:currentPrice="currentPrice"
         v-on:changeAppControler="updateSectionController($event)"
+        v-on:dataSent="updateData($event)"
       ></component>
     </transition>
   </div>
@@ -44,11 +46,16 @@ export default {
       appSectionController: 0,
       printPlaces: [],
       imgID: 0,
+      currentPrice: 0,
     };
   },
   methods: {
     updateSectionController: function (controler) {
       this.appSectionController = controler;
+    },
+    updateData: function (data) {
+      this.printPlaces = data.printPlaces;
+      this.currentPrice = data.updatedPrice;
     },
   },
   created() {
