@@ -3,29 +3,30 @@
     <div class="mainSection">
       <h1>Wybierz swoje idealne zdjęcie</h1>
       <div class="randomImg" v-bind:style="[this.randomImgStyles]">
-        <div class="previous imgBtn">Poprzednie zdjęcie</div>
+        <div class="previous imgBtn" v-on:click="previousImg">
+          Poprzednie zdjęcie
+        </div>
         <div class="next imgBtn" v-on:click="nextRandomImg">Losuj następne</div>
       </div>
       <div class="controlButtons">
-        <div class="btn" v-on:click="sendDataToApp(0)">
+        <div class="btn" v-on:click="sendDataToApp(1)">
           Wstecz
         </div>
-        <div class="btn" v-on:click="sendDataToApp(2)">
+        <div class="btn" v-on:click="sendDataToApp(3)">
           Dalej
         </div>
       </div>
     </div>
     <overview
-      v-bind:imageID="imageID"
+      v-bind:currentImgID="currentImgID"
       v-bind:printPlaces="printPlaces"
       v-bind:currentPrice="currentPrice"
-      v-on:changePrice="changePrice($event)"
     ></overview>
   </div>
 </template>
 
 <script>
-import overview from "../Overview/overview.vue";
+import overviewChooseImg from "../Overview/overviewChooseImg.vue";
 
 export default {
   props: {
@@ -41,23 +42,61 @@ export default {
   },
   name: "chooseImage",
   components: {
-    overview: overview,
+    overview: overviewChooseImg,
   },
   data() {
     return {
-      randomImgStyles: {
+      currentImgID: this.imageID,
+      randomImgStyles: {},
+      goBacks: 0,
+      previousImgID: this.imageID,
+    };
+  },
+  methods: {
+    changeAppControler: function (controler) {
+      this.$emit(`changeAppControler`, controler);
+    },
+    nextRandomImg: function () {
+      this.previousImgID = this.currentImgID;
+      this.currentImgID = Math.floor(Math.random() * 1000);
+      this.randomImgStyles = {
         width: "350px",
         height: "350px",
         border: "1px solid black",
         marginTop: "50px",
-        backgroundImage: `url("https://picsum.photos/id/${this.imageID}/350/")`,
-      },
-    };
-  },
-  methods: {
-    nextRandomImg: function () {
-      //this.imageID = Math.floor(Math.random() * 1000);
+        backgroundImage: `url("https://picsum.photos/id/${this.currentImgID}/350/")`,
+      };
+      this.goBacks = 0;
     },
+    previousImg: function () {
+      if (this.goBacks === 0) {
+        this.currentImgID = this.previousImgID;
+        this.randomImgStyles = {
+          width: "350px",
+          height: "350px",
+          border: "1px solid black",
+          marginTop: "50px",
+          backgroundImage: `url("https://picsum.photos/id/${this.currentImgID}/350/")`,
+        };
+        this.goBacks++;
+      }
+    },
+    sendDataToApp: function (controler) {
+      this.$emit(`dataSent`, {
+        printPlaces: this.printPlaces,
+        updatedPrice: this.updatedPrice,
+      });
+      this.changeAppControler(controler);
+    },
+  },
+  created() {
+    this.randomImgStyles = {
+      width: "350px",
+      height: "350px",
+      border: "1px solid black",
+      marginTop: "50px",
+      backgroundImage: `url("https://picsum.photos/id/${this.currentImgID}/350/")`,
+    };
   },
 };
 </script>
