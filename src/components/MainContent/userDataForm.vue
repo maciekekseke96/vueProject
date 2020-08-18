@@ -6,9 +6,15 @@
         <form>
           <h2>Dane podstawowe</h2>
           <label>Imię *</label>
-          <input type="text" placeholder="Imię" v-model="userData.name" />
+          <input
+            class="required"
+            type="text"
+            placeholder="Imię"
+            v-model="userData.name"
+          />
           <label>Nazwisko *</label>
           <input
+            class="required"
             type="text"
             placeholder="Nazwisko"
             v-model="userData.surname"
@@ -20,39 +26,48 @@
             v-model="userData.telephone"
           />
           <label>Adres E-mail *</label>
-          <input type="email" placeholder="e-mail" v-model="userData.email" />
+          <input
+            class="required"
+            type="email"
+            placeholder="e-mail"
+            v-model="userData.email"
+          />
         </form>
         <form>
           <h2>Dane adresowe</h2>
           <label>Ulica *</label>
           <input
+            class="required"
             type="text"
             placeholder="Ulica"
-            v-model="userData.address.street"
+            v-model="userData.street"
           />
           <label>Numer budynku *</label>
           <input
+            class="required"
             type="text"
             placeholder="Numer budynku"
-            v-model="userData.address.building"
+            v-model="userData.building"
           />
           <label>Numer mieszkania</label>
           <input
             type="text"
             placeholder="Numer mieszkania"
-            v-model="userData.address.flat"
+            v-model="userData.flat"
           />
           <label>Kod pocztowy *</label>
           <input
+            class="required"
             type="text"
             placeholder="Kod pocztowy"
-            v-model="userData.address.postalCode"
+            v-model="userData.postalCode"
           />
           <label>Miasto *</label>
           <input
+            class="required"
             type="text"
             placeholder="Miasto"
-            v-model="userData.address.city"
+            v-model="userData.city"
           />
         </form>
       </div>
@@ -60,9 +75,12 @@
         <div class="btn" v-on:click="sendDataToApp(2)">
           Wstecz
         </div>
-        <div class="btn" v-on:click="sendDataToApp(4)">
+        <div class="btn" v-on:click="checkForm">
           Podsumowanie
         </div>
+      </div>
+      <div class="errors" v-if="mainErrors.length > 0">
+        {{ mainErrors.join(", ") }} are required fields. Please check your data
       </div>
     </div>
     <overview
@@ -99,14 +117,13 @@ export default {
         surname: "",
         telephone: "",
         email: "",
-        address: {
-          street: "",
-          building: "",
-          flat: "",
-          postalCode: "",
-          city: "",
-        },
+        street: "",
+        building: "",
+        flat: "",
+        postalCode: "",
+        city: "",
       },
+      mainErrors: [],
     };
   },
   methods: {
@@ -118,6 +135,27 @@ export default {
         userData: this.userData,
       });
       this.changeAppControler(controler);
+    },
+    checkForm: function () {
+      this.mainErrors = [];
+      let required = [
+        "name",
+        "surname",
+        "email",
+        "street",
+        "building",
+        "postalCode",
+        "city",
+      ];
+      required.forEach((field) => {
+        if (this.userData[field].length < 1) {
+          this.mainErrors.push(field);
+        }
+      });
+      console.log(this.mainErrors);
+      if (this.mainErrors.length < 1) {
+        this.sendDataToApp(4);
+      }
     },
   },
 };
@@ -145,6 +183,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 30px;
+  position: relative;
 }
 .mainSection h1 {
   font-family: "Russo One", sans-serif;
@@ -209,5 +248,19 @@ label {
 .btn:hover {
   cursor: pointer;
   transform: scale(1.08);
+}
+.errors {
+  width: 100%;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Russo One", sans-serif;
+  color: red;
+  font-size: 25px;
+  position: absolute;
+  left: 0;
+  bottom: -120px;
+  background-color: #def2f1;
 }
 </style>
