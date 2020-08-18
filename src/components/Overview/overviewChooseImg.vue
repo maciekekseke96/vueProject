@@ -79,14 +79,7 @@ export default {
       };
     },
   },
-  methods: {
-    handle: function () {
-      console.log(this.currentImgID);
-    },
-  },
-  created() {
-    console.log(this.currentImgID);
-  },
+  methods: {},
 };
 </script>
 

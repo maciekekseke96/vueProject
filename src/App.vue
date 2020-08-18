@@ -11,6 +11,7 @@
           v-on:changeAppControler="updateSectionController($event)"
           v-on:dataSent="updateDataPrintPlace($event)"
           v-on:dataSentfromChooseImage="updateDataChooseImage($event)"
+          v-on:dataSentfromUserForm="updateDataUserForm($event)"
         ></component>
       </keep-alive>
     </transition>
@@ -47,7 +48,7 @@ export default {
         "orderSummary",
         "thankyouPage",
       ],
-      appSectionController: 0,
+      appSectionController: 3,
       printPlaces: [],
       imgID: 0,
       currentPrice: 0,
@@ -64,6 +65,9 @@ export default {
     },
     updateDataChooseImage: function (data) {
       this.imgID = data.updatedImgID;
+    },
+    updateDataUserForm: function (data) {
+      this.userData = data;
     },
   },
   created() {
