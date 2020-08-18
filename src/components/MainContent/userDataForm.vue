@@ -10,22 +10,36 @@
             class="required"
             type="text"
             placeholder="Imię"
-            v-model="userData.name"
+            v-model="userData.imie"
           />
           <label>Nazwisko *</label>
           <input
             class="required"
             type="text"
             placeholder="Nazwisko"
-            v-model="userData.surname"
+            v-model="userData.nazwisko"
           />
-          <label>Telefon</label>
+          <label class="specific"
+            >Telefon
+            <span
+              v-if="specificErrors.includes('telefon')"
+              class="errorPlaceholder"
+              >Zła długość numeru</span
+            ></label
+          >
           <input
             type="text"
-            placeholder="Telefon"
-            v-model="userData.telephone"
+            placeholder="Telefon (123456789)"
+            v-model="userData.telefon"
           />
-          <label>Adres E-mail *</label>
+          <label class="specific"
+            >Adres E-mail *
+            <span
+              v-if="specificErrors.includes('email')"
+              class="errorPlaceholder"
+              >Sprawdz adres email</span
+            ></label
+          >
           <input
             class="required"
             type="email"
@@ -40,34 +54,41 @@
             class="required"
             type="text"
             placeholder="Ulica"
-            v-model="userData.street"
+            v-model="userData.ulica"
           />
           <label>Numer budynku *</label>
           <input
             class="required"
             type="text"
             placeholder="Numer budynku"
-            v-model="userData.building"
+            v-model="userData.numerDomu"
           />
           <label>Numer mieszkania</label>
           <input
             type="text"
             placeholder="Numer mieszkania"
-            v-model="userData.flat"
+            v-model="userData.numerMieszkania"
           />
-          <label>Kod pocztowy *</label>
+          <label class="specific"
+            >Kod pocztowy *
+            <span
+              v-if="specificErrors.includes('kodPocztowy')"
+              class="errorPlaceholder"
+              >Sprawdz kod pocztowy</span
+            ></label
+          >
           <input
             class="required"
             type="text"
-            placeholder="Kod pocztowy"
-            v-model="userData.postalCode"
+            placeholder="Kod pocztowy (bez '-')"
+            v-model="userData.kodPocztowy"
           />
           <label>Miasto *</label>
           <input
             class="required"
             type="text"
             placeholder="Miasto"
-            v-model="userData.city"
+            v-model="userData.miasto"
           />
         </form>
       </div>
@@ -80,7 +101,7 @@
         </div>
       </div>
       <div class="errors" v-if="mainErrors.length > 0">
-        {{ mainErrors.join(", ") }} are required fields. Please check your data
+        {{ mainErrors.join(", ") }} to dane wymagane. Uzupełnij je.
       </div>
     </div>
     <overview
@@ -113,17 +134,18 @@ export default {
   data() {
     return {
       userData: {
-        name: "",
-        surname: "",
-        telephone: "",
+        imie: "",
+        nazwisko: "",
+        telefon: "",
         email: "",
-        street: "",
-        building: "",
-        flat: "",
-        postalCode: "",
-        city: "",
+        ulica: "",
+        numerDomu: "",
+        numerMieszkania: "",
+        kodPocztowy: "",
+        miasto: "",
       },
       mainErrors: [],
+      specificErrors: [],
     };
   },
   methods: {
@@ -136,24 +158,35 @@ export default {
       });
       this.changeAppControler(controler);
     },
+    checkSpecificInputs: function () {
+      this.specificErrors = [];
+      if (!this.userData.email.includes("@")) {
+        this.specificErrors.push("email");
+      }
+      if (!this.userData.telefon.length === 9) {
+        this.specificErrors.push("kodPocztowy");
+      }
+      if (!this.userData.kodPocztowy.length === 5) {
+        this.specificErrors.push("telefon");
+      }
+    },
     checkForm: function () {
       this.mainErrors = [];
       let required = [
-        "name",
-        "surname",
+        "imie",
+        "nazwisko",
         "email",
-        "street",
-        "building",
-        "postalCode",
-        "city",
+        "ulica",
+        "numerDomu",
+        "kodPocztowy",
       ];
       required.forEach((field) => {
         if (this.userData[field].length < 1) {
           this.mainErrors.push(field);
         }
       });
-      console.log(this.mainErrors);
-      if (this.mainErrors.length < 1) {
+      this.checkSpecificInputs();
+      if (this.mainErrors.length < 1 && this.specificErrors.length < 1) {
         this.sendDataToApp(4);
       }
     },
@@ -262,5 +295,16 @@ label {
   left: 0;
   bottom: -120px;
   background-color: #def2f1;
+}
+
+.specific {
+  position: relative;
+}
+
+.errorPlaceholder {
+  position: absolute;
+  color: red;
+  bottom: -60px;
+  left: 0;
 }
 </style>
