@@ -163,11 +163,11 @@ export default {
       if (!this.userData.email.includes("@")) {
         this.specificErrors.push("email");
       }
-      if (!this.userData.telefon.length === 9) {
-        this.specificErrors.push("kodPocztowy");
-      }
-      if (!this.userData.kodPocztowy.length === 5) {
+      if (this.userData.telefon.length != 9) {
         this.specificErrors.push("telefon");
+      }
+      if (this.userData.kodPocztowy.length != 5) {
+        this.specificErrors.push("kodPocztowy");
       }
     },
     checkForm: function () {
