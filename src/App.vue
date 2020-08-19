@@ -8,6 +8,7 @@
           v-bind:imageID="imgID"
           v-bind:currentPrice="currentPrice"
           v-bind:printPlaces="printPlaces"
+          v-bind:userData="userData"
           v-on:changeAppControler="updateSectionController($event)"
           v-on:dataSent="updateDataPrintPlace($event)"
           v-on:dataSentfromChooseImage="updateDataChooseImage($event)"
@@ -48,7 +49,7 @@ export default {
         "orderSummary",
         "thankyouPage",
       ],
-      appSectionController: 3,
+      appSectionController: 0,
       printPlaces: [],
       imgID: 0,
       currentPrice: 0,

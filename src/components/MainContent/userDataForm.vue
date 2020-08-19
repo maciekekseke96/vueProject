@@ -153,9 +153,7 @@ export default {
       this.$emit(`changeAppControler`, controler);
     },
     sendDataToApp: function (controler) {
-      this.$emit(`dataSentfromUserForm`, {
-        userData: this.userData,
-      });
+      this.$emit(`dataSentfromUserForm`, this.userData);
       this.changeAppControler(controler);
     },
     checkSpecificInputs: function () {

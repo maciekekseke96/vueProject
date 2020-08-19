@@ -84,7 +84,7 @@ export default {
     console.log(this.imageID);
   },
   updated() {
-    this.updatedPrice = this.printPlaces * 10;
+    this.updatedPrice = this.printPlaces.length * 10;
     this.$emit(`changePrice`, this.updatedPrice);
   },
 };
