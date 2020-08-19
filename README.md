@@ -1,6 +1,6 @@
 # cli-project
 
-> A Vue.js project
+> Project of self-designed t-shirts shop, created in Vue.js technology.
 
 ## Build Setup
 
