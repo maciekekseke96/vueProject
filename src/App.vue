@@ -48,7 +48,7 @@ export default {
         "orderSummary",
         "thankyouPage",
       ],
-      appSectionController: 0,
+      appSectionController: 3,
       printPlaces: [],
       imgID: 0,
       currentPrice: 0,

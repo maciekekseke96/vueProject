@@ -91,13 +91,13 @@
             v-model="userData.miasto"
           />
         </form>
-      </div>
-      <div class="controlButtons">
-        <div class="btn" v-on:click="sendDataToApp(2)">
-          Wstecz
-        </div>
-        <div class="btn" v-on:click="checkForm">
-          Podsumowanie
+        <div class="controlButtons">
+          <div class="btn" v-on:click="sendDataToApp(2)">
+            Wstecz
+          </div>
+          <div class="btn" v-on:click="checkForm">
+            Podsumowanie
+          </div>
         </div>
       </div>
       <div class="errors" v-if="mainErrors.length > 0">
@@ -258,13 +258,16 @@ label {
 
 .forms {
   display: flex;
+  position: relative;
 }
 .controlButtons {
-  width: 70%;
+  width: 100%;
   height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 }
 
 .btn {
