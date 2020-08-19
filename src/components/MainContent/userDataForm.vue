@@ -163,7 +163,10 @@ export default {
       if (!this.userData.email.includes("@")) {
         this.specificErrors.push("email");
       }
-      if (this.userData.telefon.length != 9) {
+      if (
+        this.userData.telefon.length != 9 &&
+        this.userData.telefon.length != 0
+      ) {
         this.specificErrors.push("telefon");
       }
       if (this.userData.kodPocztowy.length != 5) {
