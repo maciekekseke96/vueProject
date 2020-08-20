@@ -62,11 +62,15 @@ export default {
       this.updatedPrice = price;
     },
     sendDataToApp: function (controler) {
-      this.$emit(`dataSent`, {
-        printPlaces: this.printPlaces,
-        updatedPrice: this.updatedPrice,
-      });
-      this.changeAppControler(controler);
+      if (this.printPlaces.length > 0) {
+        this.$emit(`dataSent`, {
+          printPlaces: this.printPlaces,
+          updatedPrice: this.updatedPrice,
+        });
+        this.changeAppControler(controler);
+      } else {
+        alert("Wybierz co najmniej jedną opcję nadruku");
+      }
     },
   },
 };

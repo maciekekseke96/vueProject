@@ -15,7 +15,7 @@
         <ul>
         <li>Imię: <span class="mainData">{{userData.imie}}</span> Nazwisko: <span class="mainData">{{userData.nazwisko}}</span></li>
         <li>Email: <span class="mainData">{{userData.email}}</span> <span v-if="userData.telefon.length===9">Telefon: <span class="mainData">{{userData.telefon}}</span></span></li>
-        <li>Ulicy: <span class="mainData"> {{userData.ulica}}</span> Numer domu: <span class="mainData">{{userData.numerDomu}}</span> <span v-if="userData.numerMieszkania.length>0">Numer mieszkania: <span class="mainData">{{userData.numerMieszkania}}</span></span></li>
+        <li>Ulica: <span class="mainData"> {{userData.ulica}}</span> Numer domu: <span class="mainData">{{userData.numerDomu}}</span> <span v-if="userData.numerMieszkania.length>0">Numer mieszkania: <span class="mainData">{{userData.numerMieszkania}}</span></span></li>
         <li>Kod Pocztowy: <span class="mainData">{{userData.kodPocztowy}}</span> Miasto: <span class="mainData">{{userData.miasto}}</span></li>
         </ul>
         </p>
@@ -223,6 +223,7 @@ export default {
 
 .mainData {
   color: #17252a;
+  margin-right: 15px;
 }
 
 .btn:hover {

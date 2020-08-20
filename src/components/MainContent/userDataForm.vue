@@ -158,7 +158,10 @@ export default {
     },
     checkSpecificInputs: function () {
       this.specificErrors = [];
-      if (!this.userData.email.includes("@")) {
+      if (
+        !this.userData.email.includes("@") &&
+        this.userData.email.length > 0
+      ) {
         this.specificErrors.push("email");
       }
       if (
@@ -167,7 +170,10 @@ export default {
       ) {
         this.specificErrors.push("telefon");
       }
-      if (this.userData.kodPocztowy.length != 5) {
+      if (
+        this.userData.kodPocztowy.length != 5 &&
+        this.userData.kodPocztowy.length != 0
+      ) {
         this.specificErrors.push("kodPocztowy");
       }
     },
